@@ -1,0 +1,46 @@
+[user]
+  name = Jackson Wallace
+  email = jwallace1410@gmail.com
+
+[core]
+  whitespace = error
+
+[url "git@github.com:jackson-wallace/"]
+  insteadOf = "jw:"
+
+[url "git@github.com:"]
+  insteadOf = "gh:"
+
+# add url for work repos here
+
+[init]
+  defaultBranch = main
+
+[status]
+  branch = true
+  short = true
+  showStash = true
+  showUntrackedFiles = all
+
+[diff]
+  context = 3
+  renames = copies
+  interHunkContext = 10
+
+[color "diff"]
+  meta = black bold
+  frag = magenta
+  context = white
+  whitespace = yellow reverse
+  old = red
+
+[commit]
+  template = ~/.config/git/template
+
+[log]
+  abbrevCommit = true
+  graphColors = blue,yellow,cyan,magenta,green,red
+
+[blame]
+  coloring = highlightRecent
+  date = relative
