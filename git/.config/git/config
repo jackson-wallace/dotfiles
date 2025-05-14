@@ -4,6 +4,7 @@
 
 [core]
   whitespace = error
+  editor = nvim
 
 [url "git@github.com:jackson-wallace/"]
   insteadOf = "jw:"
