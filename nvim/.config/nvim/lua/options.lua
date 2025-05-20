@@ -27,7 +27,7 @@ vim.keymap.set("v", "<leader>y", '"+y')
 -- Paste from system clipboard
 vim.keymap.set("n", "<leader>p", '"+p')
 
-vim.keymap.set('n', '<leader>e', ':Ex<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>e', ':Oil<CR>', { noremap = true, silent = true })
 
 vim.opt.hlsearch = true
 vim.opt.scrolloff = 10
