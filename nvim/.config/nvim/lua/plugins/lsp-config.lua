@@ -1,72 +1,76 @@
 return {
-	{
-		"williamboman/mason.nvim",
-		config = function()
-			require("mason").setup()
-		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "ts_ls", "eslint", "cssls", "html", "jsonls", "gopls" },
-			})
-		end,
-	},
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lspconfig = require("lspconfig")
-			local servers = { "lua_ls", "ts_ls", "eslint", "cssls", "html", "jsonls", "gopls" }
+  {
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end,
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "lua_ls", "ts_ls", "eslint", "cssls", "html", "jsonls", "gopls", "pyright" },
+      })
+    end,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local lspconfig = require("lspconfig")
+      local servers = { "lua_ls", "ts_ls", "eslint", "cssls", "html", "jsonls", "gopls", "pyright" }
 
-			for _, server in ipairs(servers) do
-				lspconfig[server].setup({
-					capabilities = capabilities,
-				})
-			end
+      for _, server in ipairs(servers) do
+        lspconfig[server].setup({
+          capabilities = capabilities,
+        })
+      end
 
-			-- Disable diagnostic signs
-			vim.diagnostic.config({
-				signs = false,
-				virtual_text = false,
-			})
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
-			-- Use this if you want it to automatically show all diagnostics on the
-			-- current line in a floating window. Personally, I find this a bit
-			-- distracting and prefer to manually trigger it (see below). The
-			-- CursorHold event happens when after `updatetime` milliseconds. The
-			-- default is 4000 which is much too long
-			-- vim.cmd("autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()")
-			-- vim.o.updatetime = 300
+      vim.lsp.handlers["textDocument/signatureHelp"] =
+          vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
-			-- Show all diagnostics on current line in floating window
-			vim.api.nvim_set_keymap(
-				"n",
-				"<Leader>d",
-				":lua vim.diagnostic.open_float()<CR>",
-				{ noremap = true, silent = true }
-			)
-			-- Go to next diagnostic (if there are multiple on the same line, only shows
-			-- one at a time in the floating window)
-			-- vim.api.nvim_set_keymap(
-			-- 	"n",
-			-- 	"C-n",
-			-- 	":lua vim.diagnostic.goto_next()<CR>",
-			-- 	{ noremap = true, silent = true }
-			-- )
-			-- Go to prev diagnostic (if there are multiple on the same line, only shows
-			-- one at a time in the floating window)
-			-- vim.api.nvim_set_keymap(
-			-- 	"n",
-			-- 	"C-p",
-			-- 	":lua vim.diagnostic.goto_prev()<CR>",
-			-- 	{ noremap = true, silent = true }
-			-- )
+      vim.diagnostic.config({
+        signs = false,
+        virtual_text = false,
+        float = { border = "rounded" },
+      })
 
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
-		end,
-	},
+      local opts = { noremap = true, silent = true }
+
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+      vim.keymap.set("n", "<leader>ws", vim.lsp.buf.workspace_symbol, opts)
+      vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+      vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
+      vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+      vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, opts)
+      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+      vim.keymap.set("i", "<C-h>", function()
+        vim.lsp.buf.signature_help()
+      end, { noremap = true, silent = true })
+
+      vim.api.nvim_create_user_command("Diagnostics", function()
+        vim.diagnostic.setqflist({ open = true })
+      end, {})
+
+      vim.api.nvim_create_user_command("Diagnostics", function()
+        local diagnostics = vim.diagnostic.get(0)
+        for _, d in ipairs(diagnostics) do
+          print(
+            string.format(
+              "[%s] %s:%d:%d: %s",
+              d.severity,
+              vim.fn.bufname(d.bufnr),
+              d.lnum + 1,
+              d.col + 1,
+              d.message
+            )
+          )
+        end
+      end, {})
+    end,
+  },
 }

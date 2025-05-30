@@ -126,5 +126,8 @@ alias gcl="git clone"
 
 # Aliases: tmux
 alias ta='tmux attach'
+alias tt='tmux attach -t'
 alias tl='tmux list-sessions'
 alias tn='tmux new-session -s'
+
+alias ai="~/bin/ai"
