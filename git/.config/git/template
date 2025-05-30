@@ -1,38 +1,38 @@
 # Choose a type and emoji for your commit:
 #
-# feat: ✨   New feature
-# feat: 🔍   Add logging or analytics
-# feat: 🔗   Linking or navigation
-# feat: 🔒   Security improvements
+# feat: ✨ New feature
+# feat: 🔍 Add logging or analytics
+# feat: 🔗 Linking or navigation
+# feat: 🔒 Security improvements
 #
-# fix: 🐛    Bug fix
-# fix: 🐞    Minor fix
-# fix: 🩹    Patch
-# fix: 🚑️   Hotfix
+# fix: 🐛 Bug fix
+# fix: 🐞 Minor fix
+# fix: 🩹 Patch
+# fix: 🚑️ Hotfix
 #
-# style: 💅  Code style changes (whitespace, formatting)
-# style: 🎨  UI tweaks
-# style: 💄  Cosmetic updates
+# style: 💅 Code style changes (whitespace, formatting)
+# style: 🎨 UI tweaks
+# style: 💄 Cosmetic updates
 #
-# ci: 🦊     CI/CD changes
-# ci: 📦     Packaging
+# ci: 🦊 CI/CD changes
+# ci: 📦 Packaging
 #
-# deploy: 🚀  Production deploy
-# deploy: 📦  Build artifacts
+# deploy: 🚀 Production deploy
+# deploy: 📦 Build artifacts
 #
-# chore: 🧹  Maintenance
-# chore: 🔧  Config files
-# chore: ⚙️  Tooling
-# docs: 📜   Documentation
+# chore: 🧹 Maintenance
+# chore: 🔧 Config files
+# chore: ⚙️ Tooling
+# docs: 📜 Documentation
 #
-# refactor: 🔨  Code restructuring
-# perf: 🚀     Performance improvement
+# refactor: 🔨 Code restructuring
+# perf: 🚀 Performance improvement
 #
-# test: 🚦     Add or update tests
-# debug: 🧪    Debugging
+# test: 🚦 Add or update tests
+# debug: 🧪 Debugging
 #
-# BREAKING CHANGE: 🚨   Major change
-# BREAKING CHANGE: 💥   API break
-# BREAKING CHANGE: 💣   Destructive change
+# BREAKING CHANGE: 🚨 Major change
+# BREAKING CHANGE: 💥 API break
+# BREAKING CHANGE: 💣 Destructive change
 
 # Write your commit message below this line:
