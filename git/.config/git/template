@@ -1,38 +1,29 @@
-# Choose a type and emoji for your commit:
+# Commit Message Template
 #
-# feat: ✨ New feature
-# feat: 🔍 Add logging or analytics
-# feat: 🔗 Linking or navigation
-# feat: 🔒 Security improvements
+# Format: <emoji> <type of commit>: <message>
+# Example: ✨ feat: add user login flow
 #
-# fix: 🐛 Bug fix
-# fix: 🐞 Minor fix
-# fix: 🩹 Patch
-# fix: 🚑️ Hotfix
+# Commit Types and Emojis (Gitmoji Standard):
 #
-# style: 💅 Code style changes (whitespace, formatting)
-# style: 🎨 UI tweaks
-# style: 💄 Cosmetic updates
+# ✨ feat: New feature
+# 🐛 fix: Bug fix
+# ♻️ refactor: Code restructuring
+# 💄 style: Code style / UI changes (no logic)
+# 📝 docs: Documentation only changes
+# ✅ test: Add or update tests
+# 🚀 deploy: Deploy-related changes
+# 🔧 chore: Misc maintenance / config
+# 🔨 build: Build system or external dependencies
+# ⚙️ ci: CI/CD configuration
+# 📦 chore: Add or update dependencies
+# 🧪 debug: Debugging code
+# 🔒 fix: Security fix
+# 🚨 BREAKING CHANGE: Major breaking change
+# 💥 BREAKING CHANGE: API breaking change
+# 💣 BREAKING CHANGE: Destructive change (e.g. data loss)
+# 🗃️ chore: Database-related changes (e.g. migrations)
+# ⚡️ perf: Performance improvements
+# 🔍 feat: Add analytics or logging
+# 🔗 feat: Add routing or links
 #
-# ci: 🦊 CI/CD changes
-# ci: 📦 Packaging
-#
-# deploy: 🚀 Production deploy
-# deploy: 📦 Build artifacts
-#
-# chore: 🧹 Maintenance
-# chore: 🔧 Config files
-# chore: ⚙️ Tooling
-# docs: 📜 Documentation
-#
-# refactor: 🔨 Code restructuring
-# perf: 🚀 Performance improvement
-#
-# test: 🚦 Add or update tests
-# debug: 🧪 Debugging
-#
-# BREAKING CHANGE: 🚨 Major change
-# BREAKING CHANGE: 💥 API break
-# BREAKING CHANGE: 💣 Destructive change
-
 # Write your commit message below this line:
