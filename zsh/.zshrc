@@ -130,4 +130,5 @@ alias tt='tmux attach -t'
 alias tl='tmux list-sessions'
 alias tn='tmux new-session -s'
 
-alias ai="~/bin/ai"
+alias lg='lazygit'
+alias ld='lazydocker'
