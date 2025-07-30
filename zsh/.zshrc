@@ -4,7 +4,7 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/17/bin
+export PATH="/Applications/Postgres.app/Contents/Versions/17/bin:$HOME/.local/scripts:$PATH"
 
 alias air='~/go/bin/air'
 # /Users/jacks/go/bin
@@ -106,6 +106,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Keybinds
+bindkey -v
+bindkey -s ^f "tmux-sessionizer\n"
 
 # Start Zoxide
 eval "$(zoxide init --cmd cd zsh)"
