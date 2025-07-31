@@ -9,7 +9,18 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "ts_ls", "eslint", "cssls", "html", "jsonls", "gopls", "pyright" },
+        ensure_installed = {
+          "lua_ls",
+          "ts_ls",
+          "eslint",
+          "cssls",
+          "html",
+          "jsonls",
+          "gopls",
+          "pyright",
+          "clangd",
+        },
+        automatic_enable = false,
       })
     end,
   },
@@ -18,7 +29,7 @@ return {
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
-      local servers = { "lua_ls", "ts_ls", "eslint", "cssls", "html", "jsonls", "gopls", "pyright" }
+      local servers = { "lua_ls", "ts_ls", "eslint", "cssls", "html", "jsonls", "gopls", "pyright", "clangd" }
 
       for _, server in ipairs(servers) do
         lspconfig[server].setup({
@@ -50,11 +61,7 @@ return {
       vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
       vim.keymap.set("i", "<C-h>", function()
         vim.lsp.buf.signature_help()
-      end, { noremap = true, silent = true })
-
-      vim.api.nvim_create_user_command("Diagnostics", function()
-        vim.diagnostic.setqflist({ open = true })
-      end, {})
+      end, opts)
 
       vim.api.nvim_create_user_command("Diagnostics", function()
         local diagnostics = vim.diagnostic.get(0)
