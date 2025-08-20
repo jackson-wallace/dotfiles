@@ -4,10 +4,9 @@ vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set relativenumber")
 vim.cmd("set number")
-vim.cmd("set nohlsearch")
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
+  pattern = { "go", "c", "cpp", "h", "hpp" },
   callback = function()
     vim.opt_local.tabstop = 4
     vim.opt_local.softtabstop = 4
@@ -18,20 +17,24 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
+local options = { noremap = true, silent = true }
+
+vim.keymap.set("n", "<C-u>", "<C-u>zz", options)
+vim.keymap.set("n", "<C-d>", "<C-d>zz", options)
 
 -- Yank to system clipboard
-vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>y", '"+y', options)
 
 -- Paste from system clipboard
-vim.keymap.set("n", "<leader>p", '"+p')
+vim.keymap.set("n", "<leader>p", '"+p', options)
 
-vim.keymap.set("n", "<leader>e", ":Oil<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>e", ":Oil<CR>", options)
 
-vim.opt.hlsearch = true
+vim.opt.incsearch = true
+vim.opt.hlsearch = false
 vim.opt.scrolloff = 10
 vim.opt.ignorecase = true
+vim.opt.undofile = true
 
 vim.o.termguicolors = true
 vim.o.winborder = "rounded"
