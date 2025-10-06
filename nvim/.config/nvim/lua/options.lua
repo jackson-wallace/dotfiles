@@ -19,6 +19,9 @@ vim.g.maplocalleader = "\\"
 
 local options = { noremap = true, silent = true }
 
+vim.keymap.set("n", "<leader>q", ':q<CR>', options)
+vim.keymap.set("n", "<leader>w", ':w<CR>', options)
+
 vim.keymap.set("n", "<C-u>", "<C-u>zz", options)
 vim.keymap.set("n", "<C-d>", "<C-d>zz", options)
 
