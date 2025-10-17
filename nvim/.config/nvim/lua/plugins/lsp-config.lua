@@ -19,6 +19,8 @@ return {
           "gopls",
           "pyright",
           "clangd",
+          "rust_analyzer",
+          "bashls",
         },
         automatic_enable = false,
       })
@@ -29,7 +31,19 @@ return {
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
-      local servers = { "lua_ls", "ts_ls", "eslint", "cssls", "html", "jsonls", "gopls", "pyright", "clangd" }
+      local servers = {
+        "lua_ls",
+        "ts_ls",
+        "eslint",
+        "cssls",
+        "html",
+        "jsonls",
+        "gopls",
+        "pyright",
+        "clangd",
+        "rust_analyzer",
+        "bashls",
+      }
 
       for _, server in ipairs(servers) do
         lspconfig[server].setup({
@@ -51,6 +65,7 @@ return {
       local opts = { noremap = true, silent = true }
 
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
       vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
       vim.keymap.set("n", "<leader>ws", vim.lsp.buf.workspace_symbol, opts)
       vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
