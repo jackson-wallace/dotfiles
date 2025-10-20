@@ -74,7 +74,9 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+VI_MODE_RESET_PROMPT_ON_CHANGE=true
+VI_MODE_SET_CURSOR=true
+plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
