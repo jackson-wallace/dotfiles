@@ -35,7 +35,7 @@ vim.keymap.set("n", "<leader>e", ":Oil<CR>", options)
 
 vim.opt.incsearch = true
 vim.opt.hlsearch = false
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 8
 vim.opt.ignorecase = true
 vim.opt.undofile = true
 
