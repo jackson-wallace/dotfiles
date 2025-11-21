@@ -48,3 +48,6 @@
 [blame]
   coloring = highlightRecent
   date = relative
+
+[alias]
+  lg = log --graph --all --pretty=medium
