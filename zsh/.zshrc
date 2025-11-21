@@ -121,20 +121,6 @@ bindkey -s ^f "tmux-sessionizer\n"
 # Start Zoxide
 eval "$(zoxide init --cmd cd zsh)"
 
-# Aliases: git
-alias gs="git status --short"
-alias gd="git diff"
-alias gds="git diff --staged"
-alias ga="git add"
-alias gap="git add --patch"
-alias gc="git commit"
-alias gp="git push"
-alias gu="git pull"
-alias gl='git log --graph --all --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(blue)  %D%n%s%n"'
-alias gb="git branch"
-alias gi="git init"
-alias gcl="git clone"
-
 # Aliases: tmux
 alias ta='tmux attach'
 alias tt='tmux attach -t'
