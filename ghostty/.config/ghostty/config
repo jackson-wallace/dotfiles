@@ -1,0 +1,9 @@
+# Empty values reset the configuration to the default value
+font-family = JetBrainsMono NFM Regular
+
+theme = custom
+
+# disable ligatures
+font-feature = -calt
+
+background-opacity = 0.9
