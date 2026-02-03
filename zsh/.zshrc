@@ -129,3 +129,4 @@ alias tn='tmux new-session -s'
 
 alias lg='lazygit'
 alias ld='lazydocker'
+export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
