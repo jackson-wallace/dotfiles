@@ -15,8 +15,24 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Setup leader, keybinds, etc.
+-- Setup global options and keybinds
 require("options")
+require("keybinds")
 
 -- Setup lazy.nvim
 require("lazy").setup("plugins")
+
+-- Enable LSPs
+vim.lsp.enable({
+  "gopls",
+  "lua_ls",
+  "eslint",
+  "pyright",
+  "clangd",
+  "cssls",
+  "html",
+  "jsonls",
+  "rust_analyzer",
+  "bashls",
+  "ts_ls",
+})
