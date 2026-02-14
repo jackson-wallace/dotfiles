@@ -1,6 +1,8 @@
 # Empty values reset the configuration to the default value
 font-family = JetBrainsMono NFM Regular
 theme = custom
-background-opacity = 0.9
-font-feature = -calt  # disable ligatures
+# background-opacity = 0.9
+font-feature = -dlig
+font-feature = -liga
+font-feature = -calt
 mouse-hide-while-typing = true
