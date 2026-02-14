@@ -123,7 +123,7 @@ bindkey -v
 bindkey -s ^f "tmux-sessionizer\n"
 
 # Start Zoxide
-eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init zsh)"
 
 # Aliases: tmux
 alias ta='tmux attach'
