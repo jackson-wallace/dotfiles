@@ -1,7 +1,6 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.8",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local builtin = require("telescope.builtin")
@@ -10,6 +9,12 @@ return {
       vim.keymap.set("n", "<leader>fh", function()
         builtin.find_files({ hidden = true })
       end, {})
+
+      -- LSP keybinds
+      vim.keymap.set("n", "gd", builtin.lsp_definitions, {})
+      vim.keymap.set("n", "gi", builtin.lsp_implementations, {})
+      vim.keymap.set("n", "gr", builtin.lsp_references, {})
+      vim.keymap.set("n", "gt", builtin.lsp_type_definitions, {})
     end,
   },
   {
