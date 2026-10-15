@@ -12,7 +12,9 @@
 [url "git@github.com:"]
   insteadOf = "gh:"
 
-# add url for work repos here
+# machine-specific overrides (work email, work urls)
+[include]
+  path = ~/.gitconfig.work
 
 [init]
   defaultBranch = main

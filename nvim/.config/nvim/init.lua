@@ -35,4 +35,7 @@ vim.lsp.enable({
   "rust_analyzer",
   "bashls",
   "ts_ls",
+  "yaml-language-server",
+  "terraform-ls",
+  "nil_ls",
 })

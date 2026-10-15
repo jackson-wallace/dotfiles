@@ -1,7 +1,7 @@
-# Empty values reset the configuration to the default value
 font-family = JetBrainsMono NFM Regular
-theme = custom
+# theme = custom
 # background-opacity = 0.9
+background = #121212
 font-feature = -dlig
 font-feature = -liga
 font-feature = -calt

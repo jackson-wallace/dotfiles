@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -19,9 +19,7 @@ export NVM_DIR="$HOME/.nvm"
     [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
     [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+export PATH="$HOME/go/bin:$PATH"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -133,4 +131,38 @@ alias tn='tmux new-session -s'
 
 alias lg='lazygit'
 alias ld='lazydocker'
+
+# History picker function
+hp() {
+  local selected
+  selected=$(history 1 | awk '{$1="";print substr($0,2)}' | fzf --tac --no-sort --height=40% --reverse --prompt="History > ")
+  if [[ -n "$selected" ]]; then
+    print -z "$selected"
+  fi
+}
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/jwallace/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# secrets
+secrets="${XDG_CONFIG_HOME:-$HOME/.config}/secrets/work.env"
+[[ -r $secrets ]] && { set -a; source "$secrets"; set +a; }
+
+# kubectl
+alias k='kubectl'
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+
+
+source ~/.kube-tools/kubech
+
+export PATH="/Users/jwallace/go/bin:$PATH"
+
+if command -v dx >/dev/null 2>&1 && dx env >/dev/null 2>&1; then
+  eval "$(dx env)"
+fi

@@ -13,6 +13,7 @@ vim.opt.hlsearch = false
 vim.opt.scrolloff = 8
 vim.opt.ignorecase = true
 vim.opt.undofile = true
+vim.opt.autoread = true
 
 vim.o.termguicolors = true
 vim.o.winborder = "rounded"
