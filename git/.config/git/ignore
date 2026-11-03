@@ -1,2 +1,10 @@
 
 **/.claude/settings.local.json
+
+# mattpocock-skills local-only agent docs
+GLOSSARY.md
+GLOSSARY-MAP.md
+**/docs/adr/
+.out-of-scope/
+CODING_STANDARDS.md
+.research/
