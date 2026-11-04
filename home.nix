@@ -70,6 +70,9 @@ in {
       ld = "lazydocker";
       k = "kubectl";
     };
+    profileExtra = lib.optionalString isDarwin ''
+      eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+    '';
     initContent = ''
       bindkey -v
       bindkey -s ^f "tmux-sessionizer\n"
