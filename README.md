@@ -17,7 +17,16 @@ Standalone [home-manager](https://github.com/nix-community/home-manager) flake.
    nix run home-manager -- switch --flake ~/dotfiles#jwallace@Jwallace-Macbook16 -b hm-bak
    ```
 
-   On Linux, use `#jwallace@linux`.
+   Hosts: `jwallace@Jwallace-Macbook16` and `jacks@mac` (aarch64-darwin), `jwallace@linux` (x86_64-linux).
+
+   If Nix was installed without flakes enabled (official installer), the first run needs them turned on for just that invocation:
+
+   ```sh
+   NIX_CONFIG='experimental-features = nix-command flakes' \
+     nix run home-manager -- switch --flake ~/dotfiles#jacks@mac -b hm-bak
+   ```
+
+   After the first switch, `nix.settings` in `home.nix` persists flakes to `~/.config/nix/nix.conf`, so later runs need no flag.
 
 On macOS, casks and work tools still come from Homebrew.
 

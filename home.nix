@@ -1,14 +1,17 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, username, ... }:
 let
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
   # live symlink into the repo so edits apply without a switch
   link = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/${path}";
 in {
-  home.username = "jwallace";
-  home.homeDirectory = if isDarwin then "/Users/jwallace" else "/home/jwallace";
+  home.username = username;
+  home.homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
+
+  nix.package = pkgs.nix;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   home.packages = with pkgs; [
     # cli
