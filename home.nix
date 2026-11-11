@@ -75,6 +75,8 @@ in {
     };
     profileExtra = lib.optionalString isDarwin ''
       eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+      # keep the nix profile ahead of homebrew so nix-managed tools always win
+      export PATH="$HOME/.nix-profile/bin:$PATH"
     '';
     initContent = ''
       bindkey -v
