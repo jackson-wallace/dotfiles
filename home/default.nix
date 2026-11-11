@@ -1,10 +1,12 @@
 { config, lib, pkgs, username, ... }:
 let
-  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
   # live symlink into the repo so edits apply without a switch
   link = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/${path}";
 in {
-  imports = [ ./claude.nix ];
+  imports = [ ./claude.nix ./languages.nix ./work.nix ];
+
+  _module.args.link = link;
 
   home.username = username;
   home.homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
@@ -17,20 +19,10 @@ in {
 
   home.packages = with pkgs; [
     # cli
-    btop fd fzf gh git go grpcurl kubectl kubernetes-helm lazygit neovim
-    oras ripgrep skopeo tmux tree uv yq-go
-    cargo rustc
-    nodejs pnpm
+    btop fd fzf gh git grpcurl kubectl kubernetes-helm lazygit neovim
+    oras ripgrep skopeo tmux tree yq-go
     tree-sitter
-
-    # lsp
-    bash-language-server clang-tools gopls lua-language-server nil pyright
-    rust-analyzer terraform-ls typescript-language-server
-    vscode-langservers-extracted yaml-language-server
-
-    # formatters
-    black isort prettier stylua
-  ] ++ lib.optionals isLinux [ gcc ];
+  ];
 
   xdg.configFile = {
     nvim.source = link "config/nvim";
@@ -92,15 +84,7 @@ in {
         fi
       }
 
-      secrets="''${XDG_CONFIG_HOME:-$HOME/.config}/secrets/work.env"
-      [[ -r $secrets ]] && { set -a; source "$secrets"; set +a; }
-
       [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
-      [[ -r ~/.kube-tools/kubech ]] && source ~/.kube-tools/kubech
-
-      if command -v dx >/dev/null 2>&1 && dx env >/dev/null 2>&1; then
-        eval "$(dx env)"
-      fi
     '';
   };
 }

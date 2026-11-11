@@ -17,7 +17,7 @@ Standalone [home-manager](https://github.com/nix-community/home-manager) flake.
    nix run home-manager -- switch --flake ~/dotfiles#jwallace@Jwallace-Macbook16 -b hm-bak
    ```
 
-   Hosts: `jwallace@Jwallace-Macbook16` and `jacks@mac` (aarch64-darwin), `jwallace@linux` (x86_64-linux).
+   Hosts: `jwallace@Jwallace-Macbook16` and `jacks@mac` (aarch64-darwin), `jwallace@linux` (x86_64-linux). Hosts with `isWork = true` in `flake.nix` get `home/work.nix` and skip the nix-managed Claude install.
 
    If Nix was installed without flakes enabled (official installer), the first run needs them turned on for just that invocation:
 
@@ -37,4 +37,4 @@ nix flake update --flake ~/dotfiles
 home-manager switch --flake ~/dotfiles#jwallace@Jwallace-Macbook16
 ```
 
-Files in `config/` are symlinked into `~/.config`, so edits apply without a switch. Changes to `home/default.nix`, including zsh, need a switch.
+Files in `config/` are symlinked into `~/.config`, so edits apply without a switch. Changes to `home/*.nix`, including zsh, need a switch.

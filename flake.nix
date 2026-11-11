@@ -11,14 +11,18 @@
     { nixpkgs, home-manager, ... }:
     let
       home =
-        host:
-        { system, username }:
+        _:
+        {
+          system,
+          username,
+          isWork ? false,
+        }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
             ./home
           ];
-          extraSpecialArgs = { inherit host username; };
+          extraSpecialArgs = { inherit username isWork; };
         };
     in
     {
@@ -26,6 +30,7 @@
         "jwallace@Jwallace-Macbook16" = {
           system = "aarch64-darwin";
           username = "jwallace";
+          isWork = true;
         };
         "jacks@mac" = {
           system = "aarch64-darwin";

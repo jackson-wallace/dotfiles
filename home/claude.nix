@@ -1,21 +1,17 @@
 {
-  config,
   lib,
   pkgs,
-  host,
+  isWork,
+  link,
   ...
 }:
-let
-  # on work machine dx owns the claude install and settings.json
-  shouldInstallClaude = host != "jwallace@Jwallace-Macbook16";
-in
 lib.mkMerge [
   {
-    home.file.".claude/CLAUDE.md".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/claude/CLAUDE.md";
+    home.file.".claude/CLAUDE.md".source = link "config/claude/CLAUDE.md";
   }
 
-  (lib.mkIf (shouldInstallClaude) {
+  # on work hosts dx owns the claude install and settings.json
+  (lib.mkIf (!isWork) {
     nixpkgs.config.allowUnfreePredicate = pkg: lib.getName pkg == "claude-code";
 
     programs.claude-code = {

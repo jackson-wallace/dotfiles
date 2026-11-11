@@ -22,20 +22,9 @@ require("keybinds")
 -- Setup lazy.nvim
 require("lazy").setup("plugins")
 
--- Enable LSPs
-vim.lsp.enable({
-  "gopls",
-  "lua_ls",
-  "eslint",
-  "pyright",
-  "clangd",
-  "cssls",
-  "html",
-  "jsonls",
-  "rust_analyzer",
-  "bashls",
-  "ts_ls",
-  "yaml-language-server",
-  "terraform-ls",
-  "nil_ls",
-})
+-- Enable every LSP configured in lsp/
+local servers = {}
+for _, file in ipairs(vim.fn.glob(vim.fn.stdpath("config") .. "/lsp/*.lua", false, true)) do
+  table.insert(servers, vim.fn.fnamemodify(file, ":t:r"))
+end
+vim.lsp.enable(servers)
