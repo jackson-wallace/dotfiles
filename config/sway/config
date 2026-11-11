@@ -21,6 +21,10 @@ input type:touchpad {
     dwt enabled
 }
 
+input type:keyboard {
+    repeat_delay 225
+}
+
 exec mako
 exec swayidle -w \
     timeout 300 '$lock' \
