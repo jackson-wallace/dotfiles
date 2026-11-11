@@ -11,32 +11,28 @@
     { nixpkgs, home-manager, ... }:
     let
       home =
-        {
-          system,
-          username,
-          dxManagesClaude ? false,
-        }:
+        host:
+        { system, username }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
             ./home.nix
             ./claude.nix
           ];
-          extraSpecialArgs = { inherit username dxManagesClaude; };
+          extraSpecialArgs = { inherit host username; };
         };
     in
     {
-      homeConfigurations = {
-        "jwallace@Jwallace-Macbook16" = home {
+      homeConfigurations = builtins.mapAttrs home {
+        "jwallace@Jwallace-Macbook16" = {
           system = "aarch64-darwin";
           username = "jwallace";
-          dxManagesClaude = true;
         };
-        "jacks@mac" = home {
+        "jacks@mac" = {
           system = "aarch64-darwin";
           username = "jacks";
         };
-        "jwallace@linux" = home {
+        "jwallace@linux" = {
           system = "x86_64-linux";
           username = "jwallace";
         };
