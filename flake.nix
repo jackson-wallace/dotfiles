@@ -45,10 +45,6 @@
           system = "aarch64-darwin";
           username = "jacks";
         };
-        "jwallace@linux" = {
-          system = "x86_64-linux";
-          username = "jwallace";
-        };
       };
 
       nixosConfigurations.xps = nixpkgs.lib.nixosSystem {

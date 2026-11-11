@@ -17,7 +17,7 @@ Nix flake: [home-manager](https://github.com/nix-community/home-manager) homes f
    nix run home-manager -- switch --flake ~/repos/dotfiles#jwallace@Jwallace-Macbook16 -b hm-bak
    ```
 
-   Hosts: `jwallace@Jwallace-Macbook16` and `jacks@mac` (aarch64-darwin), `jwallace@linux` (x86_64-linux). Hosts with `isWork = true` in `flake.nix` get `home/work.nix` and skip the nix-managed Claude install (settings still merge into dx's `settings.json`).
+   Hosts: `jwallace@Jwallace-Macbook16` and `jacks@mac` (aarch64-darwin). Hosts with `isWork = true` in `flake.nix` get `home/work.nix` and skip the nix-managed Claude install (settings still merge into dx's `settings.json`).
 
    If Nix was installed without flakes enabled (official installer), the first run needs them turned on for just that invocation:
 
