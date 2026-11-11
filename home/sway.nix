@@ -1,4 +1,4 @@
-{ config, pkgs, link, ... }:
+{ pkgs, link, ... }:
 {
   home.packages = with pkgs; [
     # desktop
@@ -12,12 +12,9 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  fonts.fontconfig.enable = true;
+  imports = [ ./firefox.nix ];
 
-  programs.firefox = {
-    enable = true;
-    configPath = "${config.xdg.configHome}/mozilla/firefox";
-  };
+  fonts.fontconfig.enable = true;
 
   xdg.configFile = {
     sway.source = link "config/sway";
