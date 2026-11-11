@@ -55,7 +55,7 @@
         modules = [
           ./hosts/xps/configuration.nix
           # confirm model at install: sudo dmidecode -s system-product-name
-          nixos-hardware.nixosModules.dell-xps-13-9300
+          nixos-hardware.nixosModules.dell-xps-13-7390
           home-manager.nixosModules.home-manager
           {
             home-manager.users.jackson.imports = [
