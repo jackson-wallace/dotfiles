@@ -4,6 +4,7 @@
 DIRS=(
     "$HOME"
     "$HOME/dev"
+    "$HOME/repos"
 )
 
 if [[ $# -eq 1 ]]; then
@@ -12,7 +13,7 @@ else
     selected=$(
         (
             printf "%s\n" "$HOME"
-            fd . ${DIRS[@]} --type d --max-depth 1 --full-path
+            fd . ${DIRS[@]} --type d --max-depth 1 --full-path 2>/dev/null
         ) | sed "s|^$HOME/||" \
           | fzf --prompt "Select directory: "
     )
