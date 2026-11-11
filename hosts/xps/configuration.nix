@@ -41,6 +41,8 @@
   services.kanata = {
     enable = true;
     keyboards.default.config = builtins.readFile ../../config/kanata/kanata.kbd;
+    # needed so tap-hold-press sees other keys and triggers ctrl
+    keyboards.default.extraDefCfg = "process-unmapped-keys yes";
   };
 
   security.rtkit.enable = true;

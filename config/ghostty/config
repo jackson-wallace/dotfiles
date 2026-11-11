@@ -6,3 +6,4 @@ font-feature = -dlig
 font-feature = -liga
 font-feature = -calt
 mouse-hide-while-typing = true
+keybind = ctrl+v=paste_from_clipboard
