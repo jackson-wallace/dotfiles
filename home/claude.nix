@@ -10,12 +10,15 @@ lib.mkMerge [
     home.file.".claude/CLAUDE.md".source = link "config/claude/CLAUDE.md";
   }
 
-  # on work hosts dx owns the claude install and settings.json
+  # on work hosts dx owns the claude install; settings merge into its settings.json
   (lib.mkIf (!isWork) {
     nixpkgs.config.allowUnfreePredicate = pkg: lib.getName pkg == "claude-code";
+  })
 
+  {
     programs.claude-code = {
       enable = true;
+      package = lib.mkIf isWork null;
       mutableSettings = true;
       settings = {
         editorMode = "vim";
@@ -81,5 +84,5 @@ lib.mkMerge [
         ];
       };
     };
-  })
+  }
 ]
