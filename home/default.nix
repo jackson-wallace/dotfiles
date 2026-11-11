@@ -2,7 +2,7 @@
 let
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
   # live symlink into the repo so edits apply without a switch
-  link = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/${path}";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/dotfiles/${path}";
 in {
   imports = [ ./claude.nix ./languages.nix ./work.nix ];
 
