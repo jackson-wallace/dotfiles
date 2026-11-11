@@ -5,7 +5,7 @@ Standalone [home-manager](https://github.com/nix-community/home-manager) flake.
 ## Bootstrap
 
 1. Install [Nix](https://nixos.org/download/) with flakes enabled.
-2. Clone to `~/dotfiles`. The path is hardcoded in `home.nix`.
+2. Clone to `~/dotfiles`. The path is hardcoded in `home/default.nix`.
 
    ```sh
    git clone <repo-url> ~/dotfiles
@@ -26,7 +26,7 @@ Standalone [home-manager](https://github.com/nix-community/home-manager) flake.
      nix run home-manager -- switch --flake ~/dotfiles#jacks@mac -b hm-bak
    ```
 
-   After the first switch, `nix.settings` in `home.nix` persists flakes to `~/.config/nix/nix.conf`, so later runs need no flag.
+   After the first switch, `nix.settings` in `home/default.nix` persists flakes to `~/.config/nix/nix.conf`, so later runs need no flag.
 
 On macOS, casks and work tools still come from Homebrew.
 
@@ -37,4 +37,4 @@ nix flake update --flake ~/dotfiles
 home-manager switch --flake ~/dotfiles#jwallace@Jwallace-Macbook16
 ```
 
-Files in `config/` are symlinked into `~/.config`, so edits apply without a switch. Changes to `home.nix`, including zsh, need a switch.
+Files in `config/` are symlinked into `~/.config`, so edits apply without a switch. Changes to `home/default.nix`, including zsh, need a switch.

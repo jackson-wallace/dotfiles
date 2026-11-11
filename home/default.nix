@@ -4,6 +4,8 @@ let
   # live symlink into the repo so edits apply without a switch
   link = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/${path}";
 in {
+  imports = [ ./claude.nix ];
+
   home.username = username;
   home.homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
   home.stateVersion = "25.11";

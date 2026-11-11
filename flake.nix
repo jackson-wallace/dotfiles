@@ -16,8 +16,7 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
-            ./home.nix
-            ./claude.nix
+            ./home
           ];
           extraSpecialArgs = { inherit host username; };
         };

@@ -32,6 +32,7 @@ lib.mkMerge [
           "mattpocock-skills@claude-plugins-official" = true;
         };
         autoMemoryEnabled = false;
+        spinnerTipsEnabled = false;
         disableBundledSkills = true;
         disableWorkflows = true;
         disableRemoteControl = true;
