@@ -34,6 +34,36 @@ lib.mkMerge [
         disableRemoteControl = true;
         disableClaudeAiConnectors = true;
         disableArtifact = true;
+        permissions.defaultMode = "acceptEdits";
+        permissions.allow = [
+          "Bash(ls:*)"
+          "Bash(cat:*)"
+          "Bash(head:*)"
+          "Bash(tail:*)"
+          "Bash(grep:*)"
+          "Bash(rg:*)"
+          "Bash(find:*)"
+          "Bash(wc:*)"
+          "Bash(which:*)"
+          "Bash(tree:*)"
+          "Bash(git status:*)"
+          "Bash(git diff:*)"
+          "Bash(git log:*)"
+          "Bash(git show:*)"
+          "Bash(git branch:*)"
+          "Bash(npm test:*)"
+          "Bash(npm run lint:*)"
+          "Bash(tsc:*)"
+          "WebFetch"
+          "WebSearch"
+        ];
+        permissions.ask = [
+          "Bash(git push:*)"
+          "Bash(git reset --hard:*)"
+          "Bash(rm:*)"
+          "Bash(git add:*)"
+          "Bash(git commit:*)"
+        ];
         permissions.deny = [
           "EnterPlanMode"
           "ExitPlanMode"
