@@ -19,7 +19,7 @@ in {
 
   home.packages = with pkgs; [
     # cli
-    btop fd fzf gh git grpcurl kubectl kubernetes-helm lazygit neovim
+    btop fastfetch fd fzf gh git grpcurl kubectl kubernetes-helm lazygit neovim
     oras ripgrep skopeo tmux tree yq-go
     tree-sitter
   ];
