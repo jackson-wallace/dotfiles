@@ -14,7 +14,7 @@ in {
 
   programs.home-manager.enable = true;
 
-  nix.package = pkgs.nix;
+  nix.package = lib.mkDefault pkgs.nix;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   home.packages = with pkgs; [

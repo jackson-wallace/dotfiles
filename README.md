@@ -1,6 +1,6 @@
 # dotfiles
 
-Standalone [home-manager](https://github.com/nix-community/home-manager) flake.
+Nix flake: [home-manager](https://github.com/nix-community/home-manager) homes for macOS and Linux, plus a NixOS host (`xps`) running sway.
 
 ## Bootstrap
 
@@ -29,6 +29,37 @@ Standalone [home-manager](https://github.com/nix-community/home-manager) flake.
    After the first switch, `nix.settings` in `home/default.nix` persists flakes to `~/.config/nix/nix.conf`, so later runs need no flag.
 
 On macOS, casks and work tools still come from Homebrew.
+
+## NixOS (xps)
+
+System config lives in `hosts/xps/`, and home-manager runs as a NixOS module (home `jackson@xps`, with `home/sway.nix` on top of `home/`).
+
+1. Use the graphical installer: wipe the disk, enable LUKS encryption, set user `jackson` and hostname `xps`.
+2. Boot, then clone:
+
+   ```sh
+   nix-shell -p git --run 'git clone <repo-url> ~/dotfiles'
+   ```
+
+3. Replace the placeholder hardware config. If `/etc/nixos/configuration.nix` has any `boot.initrd.luks` lines, copy them into `hosts/xps/configuration.nix`. Also set `system.stateVersion` there to the installer's release.
+
+   ```sh
+   cp /etc/nixos/hardware-configuration.nix ~/dotfiles/hosts/xps/
+   ```
+
+4. Check the model and set the matching `nixos-hardware.nixosModules.dell-xps-13-<model>` in `flake.nix`:
+
+   ```sh
+   sudo dmidecode -s system-product-name
+   ```
+
+5. Apply, then commit the hardware config:
+
+   ```sh
+   sudo nixos-rebuild switch --flake ~/dotfiles#xps
+   ```
+
+After that, `sudo nixos-rebuild switch --flake ~/dotfiles` picks `xps` from the hostname. Kanata runs as root and reads `config/kanata/kanata.kbd` from the store, so changes to it need a rebuild. The other `config/` dirs are live links.
 
 ## Update
 

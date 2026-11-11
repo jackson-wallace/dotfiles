@@ -1,0 +1,21 @@
+[theme]
+theme = "plain"
+
+[icons]
+icons = "none"
+
+[[block]]
+block = "net"
+format = " $ssid "
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "battery"
+format = " bat $percentage "
+
+[[block]]
+block = "time"
+interval = 60
+format = " $timestamp.datetime(f:'%a %d %b %H:%M') "
