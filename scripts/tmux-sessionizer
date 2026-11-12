@@ -3,7 +3,6 @@
 # Define base dirs to search
 DIRS=(
     "$HOME"
-    "$HOME/dev"
     "$HOME/repos"
 )
 
