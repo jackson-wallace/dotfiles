@@ -17,7 +17,7 @@
   path = ~/.gitconfig.work
 
 [init]
-  defaultBranch = main
+  defaultBranch = master
 
 [status]
   branch = true

@@ -25,8 +25,15 @@ lib.mkMerge [
         tui = "default"; # classic renderer so tmux copy-mode can scroll the session
         statusLine = {
           type = "command";
-          command = ''${lib.getExe pkgs.jq} -r '"\(.model.display_name) | \(.context_window.used_percentage // 0 | floor)%"' '';
+          command = toString (pkgs.writeShellScript "claude-statusline" ''
+            input=$(cat)
+            dir=$(echo "$input" | ${lib.getExe pkgs.jq} -r '.workspace.current_dir // .cwd')
+            branch=$(${lib.getExe pkgs.git} -C "$dir" branch --show-current 2>/dev/null)
+            echo "$input" | ${lib.getExe pkgs.jq} -r --arg b "$branch" '"\(if $b != "" then "\($b) | " else "" end)\(.model.display_name) | \(.context_window.used_percentage // 0 | floor)%"'
+          '');
         };
+        effortLevel = "medium";
+        attribution.commit = "";
         enabledPlugins = {
           "mattpocock-skills@claude-plugins-official" = true;
         };
@@ -45,7 +52,6 @@ lib.mkMerge [
           "Bash(tail:*)"
           "Bash(grep:*)"
           "Bash(rg:*)"
-          "Bash(find:*)"
           "Bash(wc:*)"
           "Bash(which:*)"
           "Bash(tree:*)"
@@ -66,6 +72,11 @@ lib.mkMerge [
           "Bash(rm:*)"
           "Bash(git add:*)"
           "Bash(git commit:*)"
+          "Bash(git clean:*)"
+          "Bash(git branch -D:*)"
+          "Bash(git checkout .:*)"
+          "Bash(git restore .:*)"
+          "Bash(git stash drop:*)"
         ];
         permissions.deny = [
           "EnterPlanMode"

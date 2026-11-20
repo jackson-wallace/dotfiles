@@ -1,1 +1,1 @@
-git branch names should always be "wwallace/<concice task description with no details>"
+git branch names should always be "wwallace/<concise task description with no details>"
