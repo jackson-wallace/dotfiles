@@ -1,44 +1,64 @@
 # dotfiles
 
-Nix flake: [home-manager](https://github.com/nix-community/home-manager) homes for macOS and Linux, plus a NixOS host (`xps`) running sway.
+Nix flake: [home-manager](https://github.com/nix-community/home-manager) homes for macOS, plus a NixOS host (`xps`) running sway.
 
-## Bootstrap
+| Machine | Flake target | OS |
+| --- | --- | --- |
+| Work MacBook | `jwallace@Jwallace-Macbook16` | macOS (aarch64), `isWork = true` |
+| Personal Mac | `jacks@mac` | macOS (aarch64) |
+| Dell XPS | `xps` | NixOS |
 
-1. Install [Nix](https://nixos.org/download/) with flakes enabled.
-2. Clone to `~/repos/dotfiles`. The path is hardcoded in `home/default.nix`.
+The repo must live at `~/repos/dotfiles`. The path is hardcoded in `home/default.nix`.
+
+## Work MacBook (`jwallace@Jwallace-Macbook16`)
+
+Gets `home/work.nix` and skips the nix-managed Claude install (settings still merge into dx's `settings.json`).
+
+1. Install [Nix](https://nixos.org/download/).
+2. Clone and apply. Existing files are backed up with an `.hm-bak` suffix.
 
    ```sh
-   git clone <repo-url> ~/repos/dotfiles
+   git clone https://github.com/jackson-wallace/dotfiles.git ~/repos/dotfiles
+   NIX_CONFIG='experimental-features = nix-command flakes' \
+     nix run home-manager -- switch --flake ~/repos/dotfiles#jwallace@Jwallace-Macbook16 -b hm-bak
    ```
 
-3. Apply the config for this machine. Existing files are backed up with an `.hm-bak` suffix.
+Update:
+
+```sh
+nix flake update --flake ~/repos/dotfiles
+home-manager switch --flake ~/repos/dotfiles#jwallace@Jwallace-Macbook16 -b hm-bak
+```
+
+## Personal Mac (`jacks@mac`)
+
+1. Install [Nix](https://nixos.org/download/).
+2. Clone and apply:
 
    ```sh
-   nix run home-manager -- switch --flake ~/repos/dotfiles#jwallace@Jwallace-Macbook16 -b hm-bak
-   ```
-
-   Hosts: `jwallace@Jwallace-Macbook16` and `jacks@mac` (aarch64-darwin). Hosts with `isWork = true` in `flake.nix` get `home/work.nix` and skip the nix-managed Claude install (settings still merge into dx's `settings.json`).
-
-   If Nix was installed without flakes enabled (official installer), the first run needs them turned on for just that invocation:
-
-   ```sh
+   git clone https://github.com/jackson-wallace/dotfiles.git ~/repos/dotfiles
    NIX_CONFIG='experimental-features = nix-command flakes' \
      nix run home-manager -- switch --flake ~/repos/dotfiles#jacks@mac -b hm-bak
    ```
 
-   After the first switch, `nix.settings` in `home/default.nix` persists flakes to `~/.config/nix/nix.conf`, so later runs need no flag.
+Update:
 
-On macOS, casks and work tools still come from Homebrew.
+```sh
+nix flake update --flake ~/repos/dotfiles
+home-manager switch --flake ~/repos/dotfiles#jacks@mac -b hm-bak
+```
 
-## NixOS (xps)
+On both Macs, casks and work tools still come from Homebrew. You only need `NIX_CONFIG` on the first run. After that, `nix.settings` in `home/default.nix` keeps flakes enabled through `~/.config/nix/nix.conf`.
 
-System config lives in `hosts/xps/`, and home-manager runs as a NixOS module (home `jackson@xps`, with `home/sway.nix` on top of `home/`).
+## Dell XPS (`xps`, NixOS)
 
-1. Use the graphical installer: wipe the disk, enable LUKS encryption, set user `jackson` and hostname `xps`.
+System config lives in `hosts/xps/`. Home-manager runs as a NixOS module (user `jackson`, with `home/sway.nix` added on top of `home/`).
+
+1. Use the graphical installer: wipe the disk, enable LUKS encryption, and set user `jackson` and hostname `xps`.
 2. Boot, then clone:
 
    ```sh
-   nix-shell -p git --run 'git clone <repo-url> ~/repos/dotfiles'
+   nix-shell -p git --run 'git clone https://github.com/jackson-wallace/dotfiles.git ~/repos/dotfiles'
    ```
 
 3. Replace the placeholder hardware config. If `/etc/nixos/configuration.nix` has any `boot.initrd.luks` lines, copy them into `hosts/xps/configuration.nix`. Also set `system.stateVersion` there to the installer's release.
@@ -47,7 +67,7 @@ System config lives in `hosts/xps/`, and home-manager runs as a NixOS module (ho
    cp /etc/nixos/hardware-configuration.nix ~/repos/dotfiles/hosts/xps/
    ```
 
-4. Check the model and set the matching `nixos-hardware.nixosModules.dell-xps-13-<model>` in `flake.nix`:
+4. Check the model. If it isn't `7390`, change `nixos-hardware.nixosModules.dell-xps-13-7390` in `flake.nix` to match.
 
    ```sh
    sudo dmidecode -s system-product-name
@@ -59,13 +79,15 @@ System config lives in `hosts/xps/`, and home-manager runs as a NixOS module (ho
    sudo nixos-rebuild switch --flake ~/repos/dotfiles#xps
    ```
 
-After that, `sudo nixos-rebuild switch --flake ~/repos/dotfiles` picks `xps` from the hostname. Kanata runs as root and reads `config/kanata/kanata.kbd` from the store, so changes to it need a rebuild. The other `config/` dirs are live links.
-
-## Update
+Update:
 
 ```sh
 nix flake update --flake ~/repos/dotfiles
-home-manager switch --flake ~/repos/dotfiles#jwallace@Jwallace-Macbook16
+sudo nixos-rebuild switch --flake ~/repos/dotfiles#xps
 ```
 
-Files in `config/` are symlinked into `~/.config`, so edits apply without a switch. Changes to `home/*.nix`, including zsh, need a switch.
+Kanata runs as root and reads `config/kanata/kanata.kbd` from the store, so changes to it need a rebuild.
+
+## Editing
+
+Files in `config/` are symlinked into `~/.config`, so edits apply without a switch. Changes to `home/*.nix`, including zsh, need a switch (or a rebuild on the xps).
