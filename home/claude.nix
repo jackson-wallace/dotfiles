@@ -34,6 +34,7 @@ lib.mkMerge [
         };
         effortLevel = "medium";
         attribution.commit = "";
+        attribution.pr = "🤖 Generated with [Claude Code](https://claude.com/claude-code)";
         enabledPlugins = {
           "mattpocock-skills@claude-plugins-official" = true;
         };
