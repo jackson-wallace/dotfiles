@@ -45,6 +45,7 @@ lib.mkMerge [
         disableRemoteControl = true;
         disableClaudeAiConnectors = true;
         disableArtifact = true;
+        disableAutoMode = "disable";
         permissions.defaultMode = "acceptEdits";
         permissions.allow = [
           "Bash(ls:*)"
